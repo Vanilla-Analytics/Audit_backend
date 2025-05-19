@@ -39,7 +39,7 @@ LOGO_WIDTH = 240
 LOGO_HEIGHT = 45
 LOGO_Y_OFFSET = PAGE_HEIGHT - TOP_MARGIN + 10
 #LOGO_PATH = os.path.join(BASE_DIR, "Data_Vinci_Logo.png")
-LOGO_PATH = os.path.join(BASE_DIR, "..", "assets", "Data_Vinci_logo.png")
+LOGO_PATH = os.path.join(BASE_DIR, "..", "assets", "Data_Vinci_Logo.png")
 
 def sanitize_text(text):
     if not isinstance(text, str):
