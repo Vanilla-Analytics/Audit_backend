@@ -137,8 +137,8 @@ async def handle_form(request: Request):
         )
 
 
-@app.get("/health")
-def health_check():
+@app.get("/")
+def route():
     return {"status": "ok"}
 
 # For debugging/testing purposes
