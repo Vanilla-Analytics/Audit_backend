@@ -1,0 +1,13 @@
+reportlab
+supabase
+os
+dotenv
+pydantic
+fastapi
+uvicorn
+fastapi-users
+playwright
+urllib3
+json
+asyncio
+requests
