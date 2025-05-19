@@ -101,10 +101,7 @@ async def handle_form(request: Request):
         print(email)
         url = data.get("url")
         print(url)
-        return JSONResponse(
-            status_code=200,
-            content={"message": "Form submitted successfully"}
-        )
+        
         logger.info(f"Processing submission for {name}, {email}, URL: {url}")
         session_id = str(uuid.uuid4())
         output_dir = f"outputs/{session_id}"
