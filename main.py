@@ -84,14 +84,14 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # Add OPTIONS handler for CORS preflight requests
-@app.options("/submit/")
+@app.options("/submit")
 async def options_submit():
     return JSONResponse(
         status_code=200,
         content={"message": "OK"}
     )
 
-@app.post("/submit/")
+@app.post("/submit")
 async def handle_form(request: Request):
     try:
         data = await request.json()
