@@ -77,10 +77,11 @@ def generate_pdf(responses, output_dir, session_id):
             print(f"[!] Heading image not found: {image_path}")
 
     def draw_header():
+        logo_y = LOGO_Y_OFFSET
         
 
         if os.path.exists(LOGO_PATH):
-            logo_y = LOGO_Y_OFFSET
+            
             c.drawImage(LOGO_PATH, LEFT_MARGIN, LOGO_Y_OFFSET, width=LOGO_WIDTH, height=LOGO_HEIGHT, mask='auto')
 
     # Pink horizontal line directly after logo
