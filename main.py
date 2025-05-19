@@ -9,7 +9,7 @@ if sys.platform.startswith("win"):
 from dotenv import load_dotenv
 load_dotenv()
 
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form, Request
 import requests
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles 
@@ -92,8 +92,19 @@ async def options_submit():
     )
 
 @app.post("/submit/")
-async def handle_form(name: str = Form(...), email: str = Form(...), url: str = Form(...)):
+async def handle_form(request: Request):
     try:
+        data = await request.json()
+        name = data.get("name") 
+        print(name)
+        email = data.get("email")
+        print(email)
+        url = data.get("url")
+        print(url)
+        return JSONResponse(
+            status_code=200,
+            content={"message": "Form submitted successfully"}
+        )
         logger.info(f"Processing submission for {name}, {email}, URL: {url}")
         session_id = str(uuid.uuid4())
         output_dir = f"outputs/{session_id}"
