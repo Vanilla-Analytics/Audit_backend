@@ -1,8 +1,12 @@
+[build]
+languages = ["python", "nodejs"]
+
 [phases.setup]
-nixPkgs = ["nodejs", "python311"]
+nixPkgs = ["python311", "nodejs"]
 
 [phases.install]
 cmds = [
+  "pip install --upgrade pip",
   "pip install -r requirements.txt",
   "npm install -g playwright",
   "playwright install --with-deps"
@@ -10,3 +14,4 @@ cmds = [
 
 [start]
 cmd = "uvicorn main:app --host 0.0.0.0 --port $PORT"
+
