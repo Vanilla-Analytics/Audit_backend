@@ -116,11 +116,12 @@ def generate_pdf(responses, output_dir, session_id):
     
 
     def draw_intro_page(brand_name, branding_llm_content):
+        logo_y = LOGO_Y_OFFSET
         #c.showPage()
 
     # Header: Logo + Title
         if os.path.exists(LOGO_PATH):
-            logo_y = LOGO_Y_OFFSET
+            #logo_y = LOGO_Y_OFFSET
             c.drawImage(LOGO_PATH, LEFT_MARGIN, LOGO_Y_OFFSET, width=LOGO_WIDTH, height=LOGO_HEIGHT, mask='auto')
 
     # Pink horizontal line directly after logo
@@ -187,11 +188,12 @@ def generate_pdf(responses, output_dir, session_id):
         draw_footer_cta()
     
     def Brand_Analysis_page():
+        logo_y = LOGO_Y_OFFSET
         c.showPage()
 
     # --- Header: Logo + Pink Line ---
         if os.path.exists(LOGO_PATH):
-            logo_y = LOGO_Y_OFFSET
+            #logo_y = LOGO_Y_OFFSET
             c.drawImage(LOGO_PATH, LEFT_MARGIN, LOGO_Y_OFFSET, width=LOGO_WIDTH, height=LOGO_HEIGHT, mask='auto')
 
             line_start = LEFT_MARGIN + LOGO_WIDTH + 10
@@ -330,10 +332,12 @@ def generate_pdf(responses, output_dir, session_id):
 
     def Business_Model_Analysis_page():
         c.showPage()
+        logo_y = LOGO_Y_OFFSET
+        
 
     # --- Header: Logo + Pink Line ---
         if os.path.exists(LOGO_PATH):
-            logo_y = LOGO_Y_OFFSET
+            #logo_y = LOGO_Y_OFFSET
             c.drawImage(LOGO_PATH, LEFT_MARGIN, LOGO_Y_OFFSET, width=LOGO_WIDTH, height=LOGO_HEIGHT, mask='auto')
 
             line_start = LEFT_MARGIN + LOGO_WIDTH + 10
@@ -435,10 +439,11 @@ def generate_pdf(responses, output_dir, session_id):
 
     def Copy_Analysis_page():
         c.showPage()
+        logo_y = LOGO_Y_OFFSET
 
     # --- Header: Logo + Pink Line ---
         if os.path.exists(LOGO_PATH):
-            logo_y = LOGO_Y_OFFSET
+            #logo_y = LOGO_Y_OFFSET
             c.drawImage(LOGO_PATH, LEFT_MARGIN, LOGO_Y_OFFSET, width=LOGO_WIDTH, height=LOGO_HEIGHT, mask='auto')
 
             line_start = LEFT_MARGIN + LOGO_WIDTH + 10
@@ -685,10 +690,11 @@ def generate_pdf(responses, output_dir, session_id):
     
     def Next_Steps_page():
         c.showPage()
+        logo_y = LOGO_Y_OFFSET
 
     # --- Header: Logo + Pink Line ---
         if os.path.exists(LOGO_PATH):
-            logo_y = LOGO_Y_OFFSET
+            #logo_y = LOGO_Y_OFFSET
             c.drawImage(LOGO_PATH, LEFT_MARGIN, LOGO_Y_OFFSET, width=LOGO_WIDTH, height=LOGO_HEIGHT, mask='auto')
 
             line_start = LEFT_MARGIN + LOGO_WIDTH + 10
