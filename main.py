@@ -23,9 +23,9 @@ import logging
 
 FRONTEND_URL = os.getenv("FRONTEND_URL", "*")
 
-BASE_URL = os.getenv("BASE_URL")
-if not BASE_URL:
-    raise RuntimeError("❌ BASE_URL not set in environment")
+#BASE_URL = os.getenv("BASE_URL")
+#if not BASE_URL:
+    #raise RuntimeError("❌ BASE_URL not set in environment")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
