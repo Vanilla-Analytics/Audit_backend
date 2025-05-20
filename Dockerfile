@@ -41,6 +41,8 @@ COPY . .
 # Expose the container port (optional metadata; Railway uses $PORT)
 EXPOSE $PORT
 
+
+
 # Run the app using dynamic port
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT}"]
+CMD ["python", "main.py"]
 

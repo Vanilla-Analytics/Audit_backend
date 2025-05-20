@@ -88,12 +88,12 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # Add OPTIONS handler for CORS preflight requests
-@app.options("/submit")
-async def options_submit():
-    return JSONResponse(
-        status_code=200,
-        content={"message": "OK"}
-    )
+# @app.options("/submit")
+# async def options_submit():
+#     return JSONResponse(
+#         status_code=200,
+#         content={"message": "OK"}
+#     )
 
 @app.post("/submit")
 async def handle_form(request: Request):
@@ -141,6 +141,17 @@ async def handle_form(request: Request):
 @app.get("/")
 def route():
     return {"status": "ok"}
+
+if __name__ == "__main__":
+    import uvicorn
+    import os
+
+    uvicorn.run(
+        "main:app", 
+        host="0.0.0.0", 
+        port=int(os.environ["PORT"])  # <- Uses Railway's dynamic port
+    )
+
 
 # For debugging/testing purposes
 #if __name__ == "__main__":
