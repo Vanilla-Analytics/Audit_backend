@@ -21,7 +21,8 @@ import os
 import uuid
 import logging
 
-FRONTEND_URL = os.getenv("FRONTEND_URL", "*")
+#FRONTEND_URL = os.getenv("FRONTEND_URL", "*")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "*").strip()
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -69,6 +70,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.middleware("http")
+async def log_origin(request: Request, call_next):
+    print("🔍 Origin Header:", request.headers.get("origin"))
+    response = await call_next(request)
+    return response
+
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
