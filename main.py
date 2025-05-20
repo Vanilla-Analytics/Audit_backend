@@ -23,10 +23,6 @@ import logging
 
 FRONTEND_URL = os.getenv("FRONTEND_URL", "*")
 
-#BASE_URL = os.getenv("BASE_URL")
-#if not BASE_URL:
-    #raise RuntimeError("❌ BASE_URL not set in environment")
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -68,7 +64,7 @@ app = FastAPI()
 # CORS configuration - use FastAPI's middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[FRONTEND_URL],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
