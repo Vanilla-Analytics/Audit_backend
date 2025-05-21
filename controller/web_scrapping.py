@@ -125,12 +125,21 @@ async def process_website(url, output_dir):
             website_description, chat_history = generate_response(chat_history, description_prompt, brand_name)
         except Exception as e:
             website_description = "This is a business website."
-
+        
+        STRUCTURED_KEYS = {
+            "swot_analysis",
+            "porter_analysis",
+            "copy_gap_analysis",
+            "copy_suggestions",
+            "recommendations"
+        }
         responses = {}
         for key, sop_prompt in SOP_PROMPTS.items():
+            print(f"→ {key}") 
             full_prompt = f"{sop_prompt}\n\nWebsite Description:\n{website_description}"
             try:
-                response, chat_history = generate_response(chat_history, full_prompt, brand_name)
+                temperature = 0.0 if key in STRUCTURED_KEYS else 0.7  
+                response, chat_history = generate_response(chat_history, full_prompt, brand_name,temperature=temperature)
                 if key == "branding_messaging":
                     response = BRANDING_INTRO.format(brand_name=brand_name) + "\n\n" + response
                 responses[key] = response

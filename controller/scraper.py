@@ -100,14 +100,14 @@ async def scrape_page_content(url):
                 len(content.strip()) < 200 or
                 any(keyword in content.lower() for keyword in block_keywords)
             ):
-                print("🛑 Bot protection or weak content detected — using Jina Reader fallback")
+                print(" Bot protection or weak content detected — using Jina Reader fallback")
                 content = jina_reader_extract(url)
 
             # --- Step 2: Extract brand name if not blocked ---
             brand_name = await extract_brand_name(page)
 
         except Exception as e:
-            print("❌ Error during scraping:", str(e))
+            print(" Error during scraping:", str(e))
             content = f"Error loading page: {str(e)}"
 
         finally:

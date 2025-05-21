@@ -13,7 +13,7 @@ headers = {
     "Content-Type": "application/json"
 }
 
-def generate_response(chat_history, prompt, brand_name):
+def generate_response(chat_history, prompt, brand_name, temperature=0.7):
     system_message = (
         f"You are a professional business content writer. "
         f"Always write in third-person voice, using the brand's name ('{brand_name}'), 'the company', or 'the business' instead of 'we', 'our', or 'us'. "
@@ -29,7 +29,7 @@ def generate_response(chat_history, prompt, brand_name):
     payload = {
         "model": "deepseek-chat",
         "messages": [{"role": "system", "content": system_message}] + chat_history,
-        "temperature": 0.7
+        "temperature": temperature
     }
 
     response = requests.post(DEESEEK_API_URL, headers=headers, json=payload)
