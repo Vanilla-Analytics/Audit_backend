@@ -894,6 +894,35 @@ def generate_pdf(responses, output_dir, session_id):
                 })
             
         return swot_items
+    
+    def parse_visuals(visual_text):
+        visual_items = []
+        current_category = None
+        buffer = {}
+        for line in visual_text.split('\n'):
+            line = line.strip()
+            if not line:
+                continue
+            if line.startswith('**Fonts**'):
+                current_category = 'Fonts'
+            elif line.startswith('**Colors**'):
+                current_category = 'Colors'
+            elif line.startswith('**Imagery**'):
+                current_category = 'Imagery'
+            elif current_category:
+                clean_desc = line.replace('**', '').strip()
+                buffer.setdefault(current_category, []).append(clean_desc)
+        
+        for category, desc_lines in buffer.items():
+            full_description = " ".join(desc_lines)
+            visual_items.append({
+                'heading': category,
+                'description': full_description
+            })
+                
+                
+            
+        return visual_items
 
     def parse_porter(porter_text):
         porter_items = []
@@ -1073,7 +1102,9 @@ def generate_pdf(responses, output_dir, session_id):
 
     draw_section("COPY SUGGESTIONS", responses.get("copy_suggestions", ''))
     Brand_Analysis_page()
-    draw_section("BRAND VISUALS", responses.get("brand_visuals", ''))
+    if 'brand_visuals' in responses:
+        draw_section("BRAND VISUALS", parse_visuals(responses['brand_visuals']), is_list=True)
+    #draw_section("BRAND VISUALS", responses.get("brand_visuals", ''))
     draw_section("BRAND PERSONALITY", responses.get("brand_personality", ''))
     draw_section("BRAND POSITIONING", responses.get("brand_positioning", ''))
     

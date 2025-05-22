@@ -21,9 +21,9 @@ SOP_PROMPTS = {
         "All in just one paragraph. "
     ),
     "executive_summary": (
-        "Explain the business in 1 line. Don't use examples (e.g. ...). "
+        "Explain the business in 1 line in bold. Don't use examples (e.g. ...). "
         "Based on the analysis Give 3 critical points to improve the website. "
-        "Format each point as a separate paragraph with a bold heading followed by one line description. "
+        "Format each point as a separate 1 line paragraph."
         "Don't add any additional note. "
     ),
     "business_description": (
@@ -56,14 +56,14 @@ SOP_PROMPTS = {
 
     "copy_suggestions": (
         "Suggest 3 actionable tips to improve the website copy in 1 line each. No examples or emojis."
-        "Format each point as a separate paragraph with a bold heading followed by very short description"
+        "Format each point as a separate one line paragraph."
     ),
     "brand_analysis": (
         "Provide a brief analysis of the brand's identity, mission, and core values based on the website description."
     ),
     "brand_visuals": (
         "Describe the brand's visual style based on fonts, colors, and imagery from the website. Keep it short and clear."
-        "Format each point as a separate paragraph with a bold heading followed by very short description."
+        "Format each point as a separate paragraph with a bold heading followed by a short description.Don't add any additional note"
     ),
     "brand_personality": (
         "Explain the brand's personality (tone, mood, attitude) as seen on the website, in 2 paragraphs, 7th grade level."

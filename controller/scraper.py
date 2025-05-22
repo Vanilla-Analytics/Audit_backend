@@ -1,6 +1,7 @@
 #scraper.py
 import asyncio
 from playwright.async_api import async_playwright
+#from playwright_stealth import stealth_async  
 from urllib.parse import urlparse
 
 import requests
@@ -113,6 +114,59 @@ async def scrape_page_content(url):
         finally:
             await browser.close()
 
-        return content.strip(), brand_name
+        return content.strip(), brand_name  
 
+#--------------------------------------------------------------------------------------------------
 
+# async def scrape_page_content(url):
+#     async with async_playwright() as p:
+#         # ✅ Keep headless=True for Railway deployment
+#         browser = await p.chromium.launch(
+#             headless=True,
+#             args=["--disable-blink-features=AutomationControlled"]
+#         )
+#         context = await browser.new_context(
+#             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+#             locale="en-US",
+#             viewport= {"width": 1280, "height": 800}
+#         )
+#         page = await context.new_page()
+
+#         # Apply stealth
+#         await stealth_async(page)
+
+#         brand_name = None
+#         content = ""
+
+#         try:
+#             await page.goto(url, wait_until="domcontentloaded", timeout=60000)
+#             await page.wait_for_load_state("networkidle")
+#             await asyncio.sleep(2)
+
+#             content = await page.evaluate("""() => {
+#                 return document.body.innerText || '';
+#             }""")
+
+#             block_keywords = [
+#                 "captcha", "verify you are human", "access denied",
+#                 "unusual traffic", "blocked", "security check"
+#             ]
+
+#             if (
+#                 not content or
+#                 len(content.strip()) < 200 or
+#                 any(keyword in content.lower() for keyword in block_keywords)
+#             ):
+#                 print("🛡️ Bot protection or weak content detected — using Jina Reader fallback")
+#                 content = jina_reader_extract(url)
+
+#             brand_name = await extract_brand_name(page)
+
+#         except Exception as e:
+#             print("❌ Error during scraping:", str(e))
+#             content = f"Error loading page: {str(e)}"
+
+#         finally:
+#             await browser.close()
+
+#         return content.strip(), brand_name

@@ -97,10 +97,20 @@ async def main(url):
 
     print("✅ Done! You can now download your PDF.")
 
-async def process_website(url, output_dir):
+async def process_website(url, output_dir,session_id=None):
     from pathlib import Path
+    from main import progress_tracker
 
     Path(output_dir).mkdir(parents=True, exist_ok=True)
+
+    
+    def progress_callback(section, percent):
+        if session_id:
+            from main import progress_tracker
+            progress_tracker[session_id] = {
+                "section": section,
+                "percent": percent
+            }
 
     async def runner():
         print("🔍 Scraping content...")
@@ -131,11 +141,12 @@ async def process_website(url, output_dir):
             "porter_analysis",
             "copy_gap_analysis",
             "copy_suggestions",
+            "brand_visuals",
             "recommendations"
         }
         responses = {}
-        for key, sop_prompt in SOP_PROMPTS.items():
-            print(f"→ {key}") 
+        for idx, (key, sop_prompt) in enumerate(SOP_PROMPTS.items()):
+            print(f"\u2192 {key}") 
             full_prompt = f"{sop_prompt}\n\nWebsite Description:\n{website_description}"
             try:
                 temperature = 0.0 if key in STRUCTURED_KEYS else 0.7  
@@ -145,7 +156,10 @@ async def process_website(url, output_dir):
                 responses[key] = response
             except Exception as e:
                 responses[key] = f"Error generating response: {str(e)}"
-
+        
+            percent = int((idx + 1) / len(SOP_PROMPTS) * 100)
+            progress_callback(key, percent)
+            await asyncio.sleep(0.05)
         responses['brand_name'] = brand_name
 
         # Save JSON and PDF
