@@ -22,8 +22,8 @@ SOP_PROMPTS = {
     ),
     "executive_summary": (
         "Explain the business in 1 line in bold. Don't use examples (e.g. ...). "
-        "Based on the analysis Give 3 critical points to improve the website. "
-        "Format each point as a separate 1 line paragraph."
+        "Based on the analysis Give 3 critical points to improve the website, followed by the statement 'Based on the analysis, here are the three critical copy and brand fixes:'. "
+        "Format each point (as 1,2,3) as a separate 1 line paragraph."
         "Don't add any additional note. "
     ),
     "business_description": (
