@@ -4,7 +4,7 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Install dependencies for Playwright
+# Install dependencies for Playwright + Tesseract-OCR
 RUN apt-get update && apt-get install -y \
     wget \
     curl \
@@ -25,6 +25,8 @@ RUN apt-get update && apt-get install -y \
     libxdamage1 \
     libxrandr2 \
     xdg-utils \
+    tesseract-ocr \
+    libtesseract-dev \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
@@ -41,8 +43,5 @@ COPY . .
 # Expose the container port (optional metadata; Railway uses $PORT)
 EXPOSE $PORT
 
-
-
 # Run the app using dynamic port
 CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port $PORT"]
-
