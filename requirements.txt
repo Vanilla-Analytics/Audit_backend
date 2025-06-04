@@ -8,3 +8,9 @@ fastapi-users
 playwright
 urllib3
 python-dotenv
+pytesseract
+pillow
+playwright
+bs4
+requests
+tesserocr
