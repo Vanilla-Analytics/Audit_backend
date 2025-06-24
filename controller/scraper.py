@@ -1,5 +1,4 @@
 #scraper.py
-# ✅ FIXED scraper.py - Accurate real-time scraping for https://myquietfuel.com/
 
 import asyncio
 from playwright.async_api import async_playwright
