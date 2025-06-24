@@ -2,7 +2,6 @@
 
 import asyncio
 from playwright.async_api import async_playwright
-from playwright_stealth import stealth_async
 from playwright_stealth import add_stealth
 from bs4 import BeautifulSoup
 from PIL import Image
