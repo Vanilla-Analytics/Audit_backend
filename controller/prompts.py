@@ -15,7 +15,7 @@ BRANDING_INTRO = (
 # All prompts now expect "Website Description" instead of "Page Content"
 SOP_PROMPTS = {
     "branding_messaging": (
-        "In 1 short paragraph, describe the brand's unique messaging and positioning strategy based on the website description."
+        "In 1 short paragraph, describe the brand's unique messaging and positioning strategy based on the website description.Do not guess anything beyond the content."
         #"Start with 'This audit identifies missed revenue opportunities in {brand_name}'s digital marketing funnel by analyzing gaps between its proven product advantages and current messaging effectiveness. "
         #"We evaluate how unclear copy, underutilized social proof, and inconsistent brand positioning dilute conversions—despite...'. "
         "All in just one paragraph. "
@@ -24,7 +24,7 @@ SOP_PROMPTS = {
         "Explain the business in 1 line in bold. Don't use examples (e.g. ...). "
         "Based on the analysis Give 3 critical points to improve the website, followed by the statement 'Based on the analysis, here are the three critical copy and brand fixes:'. "
         "Format each point (as 1,2,3) as a separate 1 line paragraph."
-        "Don't add any additional note. "
+        "Don't add any additional note.Do not guess anything beyond the content."
     ),
     "business_description": (
         "Explain what the business does to a 7th grader in 2 simple paragraphs without mentioning AI or using emojis."

@@ -44,6 +44,9 @@ def is_valid_brand_name(name):
 async def main(url):
     print("🔍 Scraping content...")
     page_text, detected_brand = await scrape_page_content(url)
+    with open("scraped_debug_preview.txt", "w", encoding="utf-8") as f:
+        f.write(page_text[:2000])  # Limit to avoid overflow
+
 
 
     detected_brand = (detected_brand or '').replace('\n', '').replace('"', '').strip()
