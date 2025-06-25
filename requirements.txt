@@ -2,8 +2,8 @@ bs4
 fastapi
 fastapi-users
 pillow
-playwright
-playwright-stealth==1.0.6
+playwright==1.42.0
+playwright-stealth==2.0.1
 pydantic
 python-dotenv
 pytesseract

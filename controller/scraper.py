@@ -1,5 +1,4 @@
 #scraper.py
-
 import asyncio
 from playwright.async_api import async_playwright
 #from playwright_stealth import add_stealth
@@ -45,11 +44,22 @@ async def extract_brand_name(page):
 
 async def scrape_page_content(url):
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True, args=["--disable-blink-features=AutomationControlled"])
+        browser = await p.chromium.launch(
+            headless=True,
+            args=[
+                "--disable-blink-features=AutomationControlled",
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage"
+                ],
+                timeout=120000
+            )
         context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
             locale="en-US",
-            viewport={"width": 1280, "height": 800}
+            viewport={"width": 1280, "height": 800},
+            java_script_enabled=True,
+            bypass_csp=True
         )
         page = await context.new_page()
         await stealth_async(page)
@@ -59,7 +69,7 @@ async def scrape_page_content(url):
         brand_name = None
 
         try:
-            await page.goto(url, wait_until="domcontentloaded", timeout=80000)
+            await page.goto(url, wait_until="domcontentloaded", timeout=120000)
             await asyncio.sleep(3)
 
             # Get all visible text except script/style/svg/canvas
