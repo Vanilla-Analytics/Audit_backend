@@ -2,7 +2,7 @@
 import asyncio
 from playwright.async_api import async_playwright
 #from playwright_stealth import add_stealth
-from playwright_stealth import stealth_async
+#from playwright_stealth import stealth_async
 #from playwright_stealth import Stealth
 from bs4 import BeautifulSoup
 from PIL import Image
@@ -68,8 +68,16 @@ async def scrape_page_content(url):
         )
         page = await context.new_page()
         #await Stealth(page)
-        await stealth_async(page)
+        #await stealth_async(page)
         #await add_stealth(page)
+        # Apply stealth workaround manually
+        await page.add_init_script("""
+            Object.defineProperty(navigator, 'webdriver', { get: () => false });
+            window.navigator.chrome = { runtime: {} };
+            Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en'] });
+            Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
+        """)
+
 
         content = ""
         brand_name = None
