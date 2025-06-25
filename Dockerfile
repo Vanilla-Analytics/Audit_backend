@@ -33,7 +33,7 @@ RUN apt-get update && apt-get install -y \
 
 
 # Install Playwright browsers
-RUN pip install playwright
+RUN pip install playwright==1.42.0
 RUN playwright install chromium
 RUN playwright install-deps
 
