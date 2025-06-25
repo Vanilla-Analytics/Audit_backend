@@ -12,11 +12,7 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from controller.web_scrapping import process_website
 from controller.to_pdf import generate_pdf
 from supabase import create_client
-# Install Playwright browsers if not already present
-if not os.environ.get("PLAYWRIGHT_BROWSERS_PATH"):
-    import playwright
-    print("Installing Playwright browsers...")
-    playwright.install()
+
 
 print("✅ Python version in use:", sys.version)
 if sys.platform.startswith("win"):

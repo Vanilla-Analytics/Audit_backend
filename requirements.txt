@@ -3,7 +3,7 @@ fastapi
 fastapi-users
 pillow
 playwright==1.42.0
-playwright-stealth==2.0.0
+playwright-stealth>=2.0.0
 pydantic
 python-dotenv
 pytesseract
