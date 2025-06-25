@@ -1,56 +1,35 @@
-# Base image
-FROM python:3.11-slim
+# Use official Python slim image
+FROM python:3.10-slim
 
-# Set working directory
-WORKDIR /app
+# Set environment variable to disable interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Install system dependencies including Tesseract
+# Install dependencies required for Playwright Chromium
 RUN apt-get update && apt-get install -y \
-    wget \
-    curl \
-    gnupg \
-    ca-certificates \
-    fonts-liberation \
-    libasound2 \
-    libatk-bridge2.0-0 \
-    libcups2 \
-    libdbus-1-3 \
-    libdrm2 \
-    libgbm1 \
-    libgtk-3-0 \
-    libnspr4 \
-    libnss3 \
-    libx11-xcb1 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxrandr2 \
-    xdg-utils \
-    tesseract-ocr \
-    libtesseract-dev \
-    poppler-utils \
-    && rm -rf /var/lib/apt/lists/*
+    wget curl unzip fonts-liberation libnss3 libatk1.0-0 \
+    libatk-bridge2.0-0 libcups2 libdbus-1-3 libxcomposite1 \
+    libxdamage1 libxrandr2 libxss1 libasound2 libxshmfence1 \
+    libgbm1 libgtk-3-0 libx11-xcb1 xvfb \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-
-
-# Install Playwright browsers
-RUN pip install playwright
-RUN playwright install chromium
-RUN playwright install-deps
-
+# Set work directory
 WORKDIR /app
 
+# Copy and install Python dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
-#RUN pip install playwright && playwright install --with-deps
 
-# Copy application code
+# Install Playwright and its browsers
+RUN playwright install --with-deps
+
+# Copy all code
 COPY . .
 
-# Expose Railway default port
-ENV PORT=8000
-EXPOSE 8000
+# Set port for Railway (default 8080)
+ENV PORT=8080
 
-# Launch application
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port $PORT"]
+# Expose the port
+EXPOSE 8080
 
-
+# Run the app using uvicorn
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
