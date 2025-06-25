@@ -2,7 +2,8 @@
 
 import asyncio
 from playwright.async_api import async_playwright
-from playwright_stealth import add_stealth
+#from playwright_stealth import add_stealth
+from playwright_stealth import stealth_async
 from bs4 import BeautifulSoup
 from PIL import Image
 import pytesseract
@@ -51,8 +52,8 @@ async def scrape_page_content(url):
             viewport={"width": 1280, "height": 800}
         )
         page = await context.new_page()
-        #await stealth_async(page)
-        await add_stealth(page)
+        await stealth_async(page)
+        #await add_stealth(page)
 
         content = ""
         brand_name = None
