@@ -43,6 +43,7 @@ async def extract_brand_name(page):
 
 
 async def scrape_page_content(url):
+    
     async with async_playwright() as p:
         browser = await p.chromium.launch(
             headless=True,
@@ -50,7 +51,8 @@ async def scrape_page_content(url):
                 "--disable-blink-features=AutomationControlled",
                 "--no-sandbox",
                 "--disable-setuid-sandbox",
-                "--disable-dev-shm-usage"
+                "--disable-dev-shm-usage",
+                "--single-process"
                 ],
                 timeout=120000
             )
@@ -59,7 +61,9 @@ async def scrape_page_content(url):
             locale="en-US",
             viewport={"width": 1280, "height": 800},
             java_script_enabled=True,
-            bypass_csp=True
+            bypass_csp=True,
+            ignore_https_errors=True,
+            accept_downloads=False
         )
         page = await context.new_page()
         await stealth_async(page)
@@ -69,8 +73,8 @@ async def scrape_page_content(url):
         brand_name = None
 
         try:
-            await page.goto(url, wait_until="domcontentloaded", timeout=120000)
-            await asyncio.sleep(3)
+            await page.goto(url, wait_until="networkidle", timeout=90000)
+            await asyncio.sleep(5)
 
             # Get all visible text except script/style/svg/canvas
             content = await page.evaluate("""

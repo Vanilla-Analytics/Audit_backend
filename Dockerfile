@@ -30,13 +30,18 @@ RUN apt-get update && apt-get install -y \
     poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy and install Python dependencies
+
+
+# Install Playwright browsers
+RUN pip install playwright
+RUN playwright install chromium
+RUN playwright install-deps
+
+WORKDIR /app
+
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
-
-
-# Install Playwright and its browser dependencies
-RUN pip install playwright && playwright install --with-deps
+#RUN pip install playwright && playwright install --with-deps
 
 # Copy application code
 COPY . .
