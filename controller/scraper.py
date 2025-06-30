@@ -81,9 +81,10 @@ async def scrape_page_content(url):
 
         content = ""
         brand_name = None
+        #wait_until="networkidle"
 
-        try:
-            await page.goto(url, wait_until="networkidle", timeout=90000)
+        try: 
+            await page.goto(url, wait_until="domcontentloaded", timeout=90000)
             await asyncio.sleep(5)
 
             # Get all visible text except script/style/svg/canvas
