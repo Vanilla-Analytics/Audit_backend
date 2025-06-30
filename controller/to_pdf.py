@@ -45,7 +45,7 @@ def sanitize_text(text):
     if not isinstance(text, str):
         text = str(text)
     text = text.replace('*', '').replace('✔', '').replace('✖', '').replace('🔹', '').replace('⚠', '').replace('®','')
-    text = text.replace('—', '-').replace('–', '-').replace('“', '"').replace('”', '"').replace('’', "'")
+    text = text.replace('—', '-').replace('–', '-').replace('“', '"').replace('”', '"').replace('’', "'").replace('■', '').replace('□', '').replace('▪', '').replace('▫', '')
     return text.strip()
 
 
